@@ -61,7 +61,7 @@ def success_pdf():
     win4 = tk.Toplevel()
     win4.wm_title("Wow..")
 
-    l = tk.Label(win2, text="PDF file generated successfully :) ")
+    l = tk.Label(win4, text="PDF file generated successfully :) ")
     l.grid(row=0, column=0)
 
     b = tk.Button(win4, text="Exit", command=win4.destroy)
