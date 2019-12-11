@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from csv import DictWriter
+from fpdf import FPDF
 
 window = tk.Tk()
 window.title("Form fill")
@@ -131,8 +132,8 @@ def write_csv_file():
     file = open("data.csv", 'a')
     dict_writer = DictWriter(file, fieldnames=['Name', 'Mobile_no', 'Email', 'Age', 'Gender', 'Eligibility'])
 
-    if :
-        dict_writer.writeheader()
+    # if :
+    #     dict_writer.writeheader()
     if check_mobile() and check_email():
         dict_writer.writerow({
             'Name': name.get(),
@@ -145,7 +146,6 @@ def write_csv_file():
         success_csv()
 
 
-from fpdf import FPDF
 
 
 def write_pdf_file():
