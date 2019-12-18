@@ -86,4 +86,4 @@ def popup_email():
 
 tk.Button(window, text="Submit", activebackground="green", command=check_all).grid(row=8, column="5")
 
-# window.mainloop()
+window.mainloop()

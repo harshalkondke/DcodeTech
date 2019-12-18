@@ -1,22 +1,27 @@
-<<<<<<< HEAD
-import tkinter as tk
+from tkinter import *
+
 import requests
-import json
 
-# window = tk.Tk()
-# window.title("Send SMS")
-from urllib3.connectionpool import xrange
+window = Tk()
+window.title("Form")
+window.geometry("300x300")
+window.configure(background="light grey")
 
-mobile = int(input("Enter phone no: "))
-n = int(input("sms: "))
+a = Label(window, text="Mobile no.")
+a.grid(row=0, column=0, pady=10)
+a1 = Entry(window)
+a1.grid(row=0, column=1, pady=10)
+b = Label(window, text="Message")
+b.grid(row=1, column=0, pady=10)
+b1 = Text(window, width=15, height=5)
+b1.grid(row=1, column=1, pady=10)
+
+btn = Button(window, text="Send", command=lambda: func(str(a1.get()), str(b1.get("1.0", "end-1c"))))
+
+btn.grid(row=3, column=1, pady=10)
+
 URL = 'https://www.way2sms.com/api/v1/sendCampaign'
 
-# import random
-# import string
-#
-# digits = "".join( [random.choice(string.digits) for i in xrange(8)] )
-# chars = "".join( [random.choice(string.letters) for i in xrange(15)] )
-# message = digits + chars
 
 # get request
 def sendPostRequest(reqUrl, apiKey, secretKey, useType, phoneNo, senderId, textMessage):
@@ -31,59 +36,17 @@ def sendPostRequest(reqUrl, apiKey, secretKey, useType, phoneNo, senderId, textM
     return requests.post(reqUrl, req_params)
 
 
-# get response
-for i in range(0,n):
-    response = sendPostRequest(URL, '5WD19U2JZXHCGTDEMUQFH6RQPOEBX0OD', 'LK61XB84BWRNDGPJ', 'stage', mobile,
-                               'harshalkondke2014@gmail.com', i)
-"""
+def func(mob, msg):
+    # get response
+    response = sendPostRequest(URL, 'E1WQHN7NMH089W3LZO77WAVH8ZPHBVAJ', 'XX8LLWFKK1GP9NYK', 'stage', mob,
+                               'rutujapowar2015@gmail.com', msg)
+    """
   Note:-
     you must provide apikey, secretkey, usetype, mobile, senderid and message values
     and then requst to api
-"""
-# print response if you want
-print(response.text)
-=======
-import tkinter as tk
-import requests
-import json
-
-# window = tk.Tk()
-# window.title("Send SMS")
-from urllib3.connectionpool import xrange
-
-mobile = int(input("Enter phone no: "))
-n = int(input("sms: "))
-URL = 'https://www.way2sms.com/api/v1/sendCampaign'
-
-# import random
-# import string
-#
-# digits = "".join( [random.choice(string.digits) for i in xrange(8)] )
-# chars = "".join( [random.choice(string.letters) for i in xrange(15)] )
-# message = digits + chars
-
-# get request
-def sendPostRequest(reqUrl, apiKey, secretKey, useType, phoneNo, senderId, textMessage):
-    req_params = {
-        'apikey': apiKey,
-        'secret': secretKey,
-        'usetype': useType,
-        'phone': phoneNo,
-        'message': textMessage,
-        'senderid': senderId
-    }
-    return requests.post(reqUrl, req_params)
+  """
+    # print response if you want
+    print(response.text)
 
 
-# get response
-for i in range(0,n):
-    response = sendPostRequest(URL, '5WD19U2JZXHCGTDEMUQFH6RQPOEBX0OD', 'LK61XB84BWRNDGPJ', 'stage', mobile,
-                               'harshalkondke2014@gmail.com', i)
-"""
-  Note:-
-    you must provide apikey, secretkey, usetype, mobile, senderid and message values
-    and then requst to api
-"""
-# print response if you want
-print(response.text)
->>>>>>> origin/master
+window.mainloop()
