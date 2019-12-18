@@ -3,6 +3,8 @@ from random import *
 from tkinter import ttk
 import pymysql
 import tkinter as tk
+import base64
+import io
 
 database = pymysql.connect(host="localhost", user="root", passwd="Pass@123")
 
@@ -137,17 +139,30 @@ about = tk.Text(after_login, width=20, height=6)
 about.grid(row=4, column=1)
 
 
+from PIL import Image
+import PIL.Image
+
+
 def add_data():
     my_age = age.get()
     Dob = text12.get("1.0", tk.END)
     imgfile = filepath.get("1.0", tk.END)
+    img_path = imgfile.strip()
+    with open(img_path, 'rb') as f:
+        photo = f.read()
+    encodestring = base64.b64encode(photo)
     my_about = about.get("1.0", tk.END)
     cursor.execute("update user set age=%s, DOB=%s, image=%s, about=%s where u_email=%s",
-                   (my_age, Dob, imgfile, my_about, email.get()))
+                   (my_age, Dob, encodestring, my_about, email.get()))
     database.commit()
     print("successfully added data...")
+    cursor.execute("select image from user where u_email=%s", email.get())
+    data = cursor.fetchall()
+    data1 = base64.b64decode(data[0][0])
+    file_like = io.BytesIO(data1)
+    img = PIL.Image.open(file_like)
+    img.show()
     raise_frame(start)
-
 
 
 add_details = tk.Button(after_login, text="submit", activebackground="green", command=add_data)
